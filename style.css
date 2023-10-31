@@ -9,16 +9,16 @@ body{
     font-family: 'Roboto', sans-serif;
     background-color: black;
     text-align: center;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: center; */
-    /* height: 2000px; */
 }
 .section__text{
     text-align: left;
-    width: 968px;
     margin-left: 100px;
+    margin-bottom: 50px;
+    margin-right: 50px;
     
+}
+.hero{
+    margin-bottom: 50px;
 }
 .title__logo{
     color: white;
@@ -27,37 +27,37 @@ body{
     color: #12FFB8;
     font-family:  "Montserrat Bold", sans-serif;
     font-size: 70px;
-    /* position: absolute; */
-    top: 70px; /* Встановіть відступи від верху, які вам підходять */
-    left: 325px; /* Встановіть відступи від лівого краю, які вам підходять */
-    /* z-index: 2;  */
-
+    top: 70px; 
+    left: 325px; 
 }
 
 .title__info{
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-image: linear-gradient(to right, #0FCD94, #12FFB8, #70D8E4, #FFFFFF);
-    animation: gradientScroll 5s linear infinite;
-    
     font-family:  "Montserrat Semi-Bold", sans-serif;
     font-size: 40px;
     
 }
-@keyframes gradientScroll {
-    0% {
-      background-position: 0% 50%;
-    }
-    100% {
-      background-position: 100% 50%;
-    }
-  }
-
 .section{
     position: absolute;
-    top:120vh;
+    top:140vh;
     left:0;
     width: 100%;
     height: 100vh;
+}
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.button__item{
+    color: #FFFFFF;
+    font-size: 20px;
+}
+.list__button{
+    display: flex;
+    gap: 20px;
+    margin-left: 100px;
+}
+.part{
+    margin-bottom: 400px;
 }

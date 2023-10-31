@@ -1,38 +1,3 @@
-// gsap.registerPlugin(ScrollTrigger);
-
-// const textContainer = document.querySelector(".text-container");
-
-// const textGradientAnimation = gsap.to(textContainer, {
-//   backgroundPosition: "100% 50%",
-//   duration: 1, // Тривалість анімації (змініть на ваш вибір)
-//   ease: "none",
-// });
-
-// const allSections = gsap.utils.toArray(".section");
-// const allSectionsNotFirst = allSections.slice(1);
-
-// gsap.set(allSections[0], { yPercent: -100 });
-
-// const fade = gsap.timeline({ defaults: { duration: 1, stagger: 1 } })
-//   .to(allSectionsNotFirst, { yPercent: -100 })
-//   .to(".section", { opacity: 0 }, 0);
-
-// ScrollTrigger.create({
-//   trigger: ".component",
-//   start: "top top",
-//   endTrigger: ".section:last-child", // Вказуємо останню секцію як точку завершення
-//   end: "bottom 50%", // Вказуємо позицію, коли анімація завершується
-//   pin: true,
-//   animation: fade,
-//   scrub: 0.3,
-//   markers: true,
-//   onUpdate: () => {
-//     textGradientAnimation.update();
-//   },
-// });
-
-
-
 var next = 1,
     tt = 3000; // 'total time'
 
@@ -52,7 +17,7 @@ ScrollTrigger.create({
   pin: true,
   animation: fade,
   scrub: 0.3,
-  // markers: true,
+  markers: true,
 });
 
 // Оголошення паралаксу для фону
@@ -68,41 +33,60 @@ ScrollTrigger.create({
 });
 
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-//     const sections = Array.from(document.querySelectorAll(".section"));
+const textContainer = document.querySelector(".text-container");
 
-//     const animations = sections.map((section, index) => {
-//         return gsap.fromTo(section, {
-//             y: index * 100, // Початкова позиція Y (різна для кожної секції)
-//             opacity: 0, // Початкова прозорість
-//         }, {
-//             y: (index - 1) * 100, // Кінцева позиція Y (різна для кожної секції)
-//             opacity: 1, // Кінцева прозорість
-//             duration: 1,
-//             scrollTrigger: {
-//                 trigger: section,
-//                 start: "top 20%",
-//                 end: "top 80%",
-//                 toggleActions: "play none none reverse",
-//                 markers: true,
-//                 scrub:true,
-//                 pin:true,
+const startColor = "#000000"; // Початковий колір тексту (чорний)
+const endColor = "#0FCD94"; // Кінцевий колір тексту (білий)
 
-//             },
-//         });
-//     });
+const textGradientAnimation = gsap.to(textContainer, {
+  color: startColor, // Початковий колір тексту
+  duration: 1, // Тривалість анімації (змініть на ваш вибір)
+  scrollTrigger: {
+    trigger: ".section__three", // Секція, яка активує анімацію
+    start: "top center", // Точка початку анімації
+    end: "bottom center", // Точка завершення анімації
+    scrub: true, // Плавне відтворення анімації при прокручуванні
+    markers: true,
+    ease: "none", 
+    onUpdate: (self) => {
+      // Функція викликається при кожному оновленні
+      const progress = self.progress; // Прогрес прокрутки від 0 до 1
+      const newColor = interpolateColors(startColor, endColor, progress); // Розрахунок проміжного кольору
+      textContainer.style.color = newColor; // Зміна кольору тексту
+    },
+  },
+});
 
-//     // Створення загального timeline
-//     const timeline = gsap.timeline();
+// Функція для інтерполяції кольорів
+function interpolateColors(startColor, endColor, progress) {
+  const r1 = parseInt(startColor.slice(1, 3), 16);
+  const g1 = parseInt(startColor.slice(3, 5), 16);
+  const b1 = parseInt(startColor.slice(5, 7), 16);
 
-//     // Додавання анімацій до загального timeline
-//     timeline.add(animations);
+  const r2 = parseInt(endColor.slice(1, 3), 16);
+  const g2 = parseInt(endColor.slice(3, 5), 16);
+  const b2 = parseInt(endColor.slice(5, 7), 16);
 
-//     // Запуск анімації
-//     timeline.play();
-// });
+  const r = Math.round(r1 + (r2 - r1) * progress);
+  const g = Math.round(g1 + (g2 - g1) * progress);
+  const b = Math.round(b1 + (b2 - b1) * progress);
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+// Паралакс для секції
+gsap.to(".section__three", {
+  y: "-30%", // Зміна положення секції по вертикалі
+  scrollTrigger: {
+    trigger: ".section__three", // Секція, яка активує анімацію
+    start: "top top", // Точка початку анімації
+    end: "bottom bottom", // Точка завершення анімації
+    scrub: true, // Плавне відтворення анімації при прокручуванні
+  },
+});
+
 
 
 
