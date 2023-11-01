@@ -17,7 +17,7 @@ ScrollTrigger.create({
   pin: true,
   animation: fade,
   scrub: 0.3,
-  markers: true,
+  // markers: true,
 });
 
 // Оголошення паралаксу для фону
@@ -48,7 +48,7 @@ const textGradientAnimation = gsap.to(textContainer, {
     start: "top center", // Точка початку анімації
     end: "bottom center", // Точка завершення анімації
     scrub: true, // Плавне відтворення анімації при прокручуванні
-    markers: true,
+    // markers: true,
     ease: "none", 
     onUpdate: (self) => {
       // Функція викликається при кожному оновленні
