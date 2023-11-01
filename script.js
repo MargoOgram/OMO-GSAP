@@ -7,8 +7,8 @@ var allSectionsNotFirst = allSections.slice(1);
 gsap.set(allSections[0], { yPercent: -100 });
 
 var fade = gsap.timeline({ defaults: { duration: 2, stagger: next } })
-  .to(allSectionsNotFirst, { yPercent: -100})
-  .to('.section', { opacity: 0 }, 0);
+  .to(allSectionsNotFirst, { yPercent: -100, scale: 0.9, y: "+=20" }) // Додали зміну розміру
+  .to('.section', { opacity: 0, scale: 0.9 }, 0); // Додали зміну розміру
 
 ScrollTrigger.create({
   trigger: '.component',
